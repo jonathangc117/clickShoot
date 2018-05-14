@@ -22,6 +22,7 @@ import { UserService } from './user.service';
 import { UnathorizedComponent } from './home/unathorized/unathorized.component';
 import { LeaderboardComponent } from './home/leaderboard/leaderboard.component';
 import { ModalComponent } from './home/login/modal/modal.component';
+import { ShootComponent } from './level/shoot/shoot.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ModalComponent } from './home/login/modal/modal.component';
     LoginComponent,
     UnathorizedComponent,
     LeaderboardComponent,
-    ModalComponent
+    ModalComponent,
+    ShootComponent
   ],
   imports: [
     NgbModule.forRoot(),
