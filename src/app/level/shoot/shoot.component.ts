@@ -6,6 +6,14 @@ import {STAGES} from '../stagesMock'
 import * as THREE from 'three';
 window['THREE'] = THREE;
 import 'three/examples/js/controls/OrbitControls';
+import { Group, ObjectLoader, TextureLoader  } from 'three';
+import MTLLoader from 'three-mtl-loader';
+//import MTLLoader from '../../../assets/MTLLoader';
+
+declare var require: any;
+//const MTLLoader = require('three-mtl-loader')(THREE);
+const OBJLoader = require('three-obj-loader')(THREE);
+
 
 @Component({
   selector: 'app-shoot',
@@ -19,13 +27,16 @@ export class ShootComponent {
   renderer = new THREE.WebGLRenderer();
   scene = null;
   camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 210000);
-  mesh = null;
-  materials = [];
-  material;// = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: false});
+  mesh = null; //mesh del skybox
+  materials = []; //materiales del skybox
+  material; // = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: false});
   cube = null;
-  geometry = new THREE.BoxGeometry(200000, 200000, 200000);
   
-
+  geometry = new THREE.BoxGeometry(200000, 200000, 200000); //skybox
+   manager = new THREE.LoadingManager();
+  objLoader = new THREE.OBJLoader(this.manager);
+  //mtLoader = new THREE.MTLLoader();
+//texturas del skybox
   imagebk = new Image();
   imageft = new Image();
   imagels = new Image();
@@ -45,8 +56,46 @@ export class ShootComponent {
 
 
   constructor() {
+
+    console.log(TextureLoader);
+
+    this.scene = new THREE.Scene();
+
+    var scene = new THREE.Scene();
     
-this.scene = new THREE.Scene();
+     
+    
+    
+    
+    this.scene= scene;
+    
+
+
+
+    // this.mtLoader.load("../../../assets/spaceCraft3.mlt", function(materials){
+    //    materials.preload();
+     
+      
+
+     this.objLoader.load(
+      // resource URL
+      '../../../assets/spaceCraft3.obj',
+      // called when resource is loaded
+      function ( object ) {
+    
+        scene.add( object );
+        object.position.set(0,0,0);
+      }
+    ); 
+      
+        
+      //  });
+
+   
+    
+
+
+
 
 
     
